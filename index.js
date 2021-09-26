@@ -21,10 +21,10 @@ let calculations = {
 
 const calculateTotal = (num1, num2, index) => {
   let operation = operations[index]
-  let calc = `${num1} ${operation} ${num2} = ${calculations[operation](parseInt(num1), parseInt(num2))}`
+  let calc = `${num1} ${operation} ${num2} = ${(calculations[operation](parseInt(num1), parseInt(num2))).toFixed(2)}`
   history.unshift(calc)
   updateHistory(history)
-  printOnConsole(calculations[operation](parseInt(num1), parseInt(num2)))
+  printOnConsole(calculations[operation](parseInt(num1), parseInt(num2)).toFixed(2))
   operationIndex = null;
   numberOne = null;
   numberTwo = null;
