@@ -11,21 +11,37 @@ let calculate = []; //add all numbers, operators and answer to send to update hi
 let currentNumber = '0'; //Printed to calculator console
 let operations = ['+', '-', 'x', '÷'];
 let numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
-let operationStatus = true;
+// let operationStatus = true; might need to be removed
+let result = null;
 
 function buttonClick(text) {
   if (text >= 0 && text < 10){
-    if (operationStatus === true)
+    // if (operationStatus === true)
     currentNumber = currentNumber+`${text}`
     console.log(currentNumber)
     console.log(text)
-    printOnConsole(text)
+    printOnConsole(text)  //Might need to remove this function call, might be redundant
   } else if (text === '+' || text === '-' || text === 'x' || text === '÷'){
     updateCalc(currentNumber, text);
   } else if (text === 'AC'){
     clearCal()
-  } else if (text === '=')
+  } else if (text === '=') {
+    calculateResult()
+    
+  }
   printOnConsole(currentNumber) //Needs to remain within the function
+}
+
+const calculateResult = () => {
+  calculate.push(currentNumber)
+  //Add a way to calculate
+  //Add a way to print to history
+
+  calculate = [];
+  currentNumber = '0';
+  printOnConsole()
+  updateHistory()
+  result = null;
 }
 
 const clearCal = () => {
