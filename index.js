@@ -39,11 +39,8 @@ function buttonClick(text) {
     printOnConsole(numberOne)
 
   } else if (numberOne !== null && numberTwo === null && text !== '=' && text !== 'AC' && operations.includes(text)){
-    if (text === 'x' || text === '÷'){
-      operationIndex = operations.indexOf(text)
-    } else if (operations[operationIndex] !== '÷' || operations[operationsoperationIndex] !== 'x'){
-      numberTwo = `${text}`
-    }
+    operationIndex = operations.indexOf(text)
+
   } else if (parseInt(text) >= 0 && text < 10 && numberTwo === null && text !== '=' && text !== 'AC'){
     numberTwo = `${text}`
     printOnConsole(numberTwo)
