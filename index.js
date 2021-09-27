@@ -28,7 +28,7 @@ const inputCheck = (input) => {
 
 const joinArray = (numberArray) => {
   let num = numberArray.join('')
-  return num
+  return +num
 }
 
 const resetCalculator = () =>{
@@ -47,10 +47,18 @@ let calculations = {
 
 const calculateTotal = (num1, num2, index) => {
   let operation = operations[index]
-  let calc = `${num1} ${operation} ${num2} = ${(calculations[operation](parseInt(num1), parseInt(num2))).toFixed(2)}`
-  history.unshift(calc)
-  updateHistory(history)
-  printOnConsole(calculations[operation](parseInt(num1), parseInt(num2)).toFixed(2))
+  let result = calculations[operation](num1, num2)
+  if (String(result).includes('.')){
+    let calc = `${num1} ${operation} ${num2} = ${result.toFixed(2)}`
+    history.unshift(calc)
+    updateHistory(history)
+    printOnConsole(result.toFixed(2))
+  } else {
+    let calc = `${num1} ${operation} ${num2} = ${result}`
+    history.unshift(calc)
+    updateHistory(history)
+    printOnConsole(result)
+  }
   operationIndex = null;
   numberOne = [];
   numberTwo = [];
@@ -93,10 +101,10 @@ const buttonClick = (input) => {
 
 // const calculateTotal = (num1, num2, index) => {
 //   let operation = operations[index]
-//   let calc = `${num1} ${operation} ${num2} = ${(calculations[operation](parseInt(num1), parseInt(num2))).toFixed(2)}`
+//   let calc = `${num1} ${operation} ${num2} = ${calculations[operation](parseInt(num1), parseInt(num2))}`
 //   history.unshift(calc)
 //   updateHistory(history)
-//   printOnConsole(calculations[operation](parseInt(num1), parseInt(num2)).toFixed(2))
+//   printOnConsole(calculations[operation](parseInt(num1), parseInt(num2)))
 //   operationIndex = null;
 //   numberOne = null;
 //   numberTwo = null;
@@ -111,8 +119,11 @@ const buttonClick = (input) => {
 //     printOnConsole(numberOne)
 
 //   } else if (numberOne !== null && numberTwo === null && text !== '=' && text !== 'AC' && operations.includes(text)){
-//     operationIndex = operations.indexOf(text)
-
+//     if (text === 'x' || text === '÷'){
+//       operationIndex = operations.indexOf(text)
+//     } else if (operations[operationIndex] !== '÷' || operations[operationsoperationIndex] !== 'x'){
+//       numberTwo = `${text}`
+//     }
 //   } else if (parseInt(text) >= 0 && text < 10 && numberTwo === null && text !== '=' && text !== 'AC'){
 //     numberTwo = `${text}`
 //     printOnConsole(numberTwo)
@@ -127,13 +138,6 @@ const buttonClick = (input) => {
 //     calculateTotal(numberOne, numberTwo, operationIndex)
 //   }
 // }
-
-
-
-
-
-
-
 /*
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
